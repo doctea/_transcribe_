@@ -179,6 +179,7 @@ void loop(){
 
   altSerial.write(2);
   altSerial.write(cmd);
+  //altSerial.write("VMM:88");
   altSerial.write(3);
 }
 
@@ -362,7 +363,8 @@ void setCmdParam(uint8_t inputCmd, uint8_t param){
   setPrefix(inputCmd);
 
   char hexParam[12] = {};
-  sprintf(hexParam, "%03d%02X", inputCmd, param*2);
+  //sprintf(hexParam, "%03d%02X", inputCmd, param*2);
+  sprintf(hexParam, "%02X", param*2);
 
   cmd[3] = ':';
   cmd[4] = hexParam[0];
@@ -370,6 +372,9 @@ void setCmdParam(uint8_t inputCmd, uint8_t param){
   cmd[6] = hexParam[2];
   cmd[7] = hexParam[3];
   cmd[8] = hexParam[4];
+
+  Serial.print(cmd);
+  Serial.println("<- setCmdParam result");
 }
 
 void setCmdTwoParams(uint8_t inputCmd, uint8_t param, uint8_t position, uint8_t storeIndex){
