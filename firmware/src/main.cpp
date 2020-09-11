@@ -167,8 +167,12 @@ void loop(){
   Serial.print(midiParam2);
   Serial.print("<-value (midiParam2)\n\n");
 
+  Serial.print(cmd);
+  Serial.print("<-cmd before setCustomMap\n");
   if(midiChannel == 0){setCustomMap();}
   else{setDefaultMap();}
+  Serial.print(cmd);
+  Serial.print("<-cmd after setCustomMap\n");
 
   removeTrailingUnderscore();
 
@@ -293,6 +297,7 @@ void setCmd(uint16_t inputCmd, uint8_t inputParam){
   Serial.print(inputCmd);
   Serial.print("<-start set cmd\n");
   position = 0;
+  /* // removed for mx*0 compatibility (presumed)
   if(inputCmd > 512){
     position = 2;
     inputCmd = inputCmd - 512;
@@ -300,7 +305,7 @@ void setCmd(uint16_t inputCmd, uint8_t inputParam){
   else if(inputCmd > 256){
     position = 1;
     inputCmd = inputCmd - 256;
-  }
+  }*/
   Serial.print(inputCmd);
   Serial.print("<-inputCmd after set position\n");
   Serial.print(position);
@@ -318,7 +323,7 @@ void setCmd(uint16_t inputCmd, uint8_t inputParam){
   }
   else{
   // no inputs
-    setCmdNoParam(inputCmd);
+    //setCmdNoParam(inputCmd); // removed for mx*0 compatibility (presumed)
   }
 }
 
